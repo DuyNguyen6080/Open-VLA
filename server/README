@@ -1,0 +1,27 @@
+run docker build -t openvla .
+Start a container, then copy files into it
+This avoids bind mounting too.
+to run docker start -ai openvla
+Start a shell container:
+    docker run -it --gpus all -p 9999:9999 --name openvla openvla bash
+
+In another terminal, copy your files into the running container:
+docker cp /home/dnguy439/Senior-Project/tcp/. tcp-dev:/app
+Then inside the container:
+cd /app
+python main.py
+
+
+docker run -u $(id -u):$(id -g) \
+>   --runtime=nvidia \
+>   -it \
+>   --name openvla \
+>   -v $HOME:$HOME \
+>   -w $HOME \
+>   tensorflow/tensorflow:latest-gpu \
+>   bash
+
+to go inside a docker that is running 
+    docker exec -it tcp-dev bash
+to reuse it run
+    docker run tcp-dev-new

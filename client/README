@@ -1,0 +1,30 @@
+git clone https://gitlab.com/sdurobotics/ur_rtde.git
+cd ur_rtde
+mkdir build
+cd build 
+
+pip install requests json-numpy
+more infomation https://github.com/CALHCI/edu-universalRobotics/tree/main/python-explorer
+
+to run docker robot sim
+docker run --rm -it \
+ --platform linux/amd64 \
+  -e ROBOT_MODEL=UR3e \
+  -p 5900:5900 \
+  -p 6080:6080 \
+  -p 29999:29999 \
+  -p 30001:30001 \
+  -p 30002:30002 \
+  -p 30003:30003 \
+  -p 30004:30004 \
+  --name ur3e_container \
+  universalrobots/ursim_e-series
+
+  source api https://sdurobotics.gitlab.io/ur_rtde/examples/examples.html
+
+Use SSH tunneling like this:
+  ssh -N -L 16080:127.0.0.1:9999 dnguy439@f35.csc.calpoly.edu
+
+Leave that terminal open.
+Then your local machine can connect to:
+127.0.0.1:16080
